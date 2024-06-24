@@ -18,6 +18,10 @@ resource "aws_rds_cluster" "this" {
   backup_retention_period       = 1
   db_subnet_group_name          = var.db_subnet_group_name
 #   enable_local_write_forwarding = true
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
@@ -28,4 +32,8 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   engine_version      = "8.0.mysql_aurora.3.07.0"
   apply_immediately   = true
   publicly_accessible = true
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
