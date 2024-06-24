@@ -28,7 +28,7 @@ resource "aws_db_parameter_group" "this" {
 
   parameter {
     name  = "read_only"
-    value = "0"
+    value = "1"
   }
 
   lifecycle {
