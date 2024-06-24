@@ -6,9 +6,9 @@ resource "aws_rds_cluster" "this" {
   engine_mode                   = "provisioned"
   engine                        = "aurora-mysql"
   engine_version                = "8.0.mysql_aurora.3.07.0"
-  replication_source_identifier = var.replication_source_identifier # promote
+  replication_source_identifier = "" # promote
 
-  availability_zones = ["eu-west-1a"]
+  availability_zones = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
 
   vpc_security_group_ids        = ["sg-0b93a6a698d1e5d36"]
   storage_encrypted             = true
@@ -30,6 +30,7 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   instance_class      = "db.t3.medium"
   engine              = "aurora-mysql"
   engine_version      = "8.0.mysql_aurora.3.07.0"
+  availability_zone = "eu-west-1c"
   apply_immediately   = true
   publicly_accessible = true
 
