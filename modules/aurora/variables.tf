@@ -15,5 +15,5 @@ variable "db_subnet_group_name" {
 
 variable "replication_source_identifier" {
   description = "ARN of a source DB cluster or DB instance"
-  default = ""
+  default = null
 }
