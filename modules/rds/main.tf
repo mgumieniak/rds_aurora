@@ -6,7 +6,7 @@ resource "aws_db_instance" "this" {
   instance_class       = "db.t3.micro"
   username             = var.db_username
   password             = var.db_password
-  parameter_group_name = "default.mysql8.0"
+  parameter_group_name = aws_db_parameter_group.this.name
 
   vpc_security_group_ids  = ["sg-0b93a6a698d1e5d36"]
   db_subnet_group_name    = var.db_subnet_group_name
@@ -19,4 +19,19 @@ resource "aws_db_instance" "this" {
   storage_encrypted   = true
   apply_immediately   = true
   deletion_protection = false
+}
+
+
+resource "aws_db_parameter_group" "this" {
+  name   = "rds-pg"
+  family = "mysql8.0"
+
+  parameter {
+    name  = "read_only"
+    value = "0"
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }

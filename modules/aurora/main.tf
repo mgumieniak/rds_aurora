@@ -6,6 +6,7 @@ resource "aws_rds_cluster" "this" {
   engine_mode                   = "provisioned"
   engine                        = "aurora-mysql"
   engine_version                = "8.0.mysql_aurora.3.07.0"
+
   replication_source_identifier = "" # promote
 
   availability_zones = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
