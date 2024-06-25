@@ -35,8 +35,9 @@ module "network" {
 # module "aurora-serverless" {
 #   source = "./modules/aurora_servless"
 #
-#   db_username = var.db_username
-#   db_password = var.db_password
+#   db_username = null
+#   db_password = null
 #   db_subnet_group_name = module.network.db_subnet_group_name
-# #   replication_source_identifier = module.rds.db_arn
+#   replication_source_identifier = null
+#   enable_local_write_forwarding = true
 # }

@@ -16,7 +16,7 @@ resource "aws_rds_cluster" "this" {
 
   master_username    = var.db_username
   master_password    = var.db_password
-  availability_zones = ["eu-west-1a"]
+  availability_zones = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
 
   vpc_security_group_ids        = ["sg-0b93a6a698d1e5d36"]
   storage_encrypted             = true
@@ -25,7 +25,13 @@ resource "aws_rds_cluster" "this" {
   apply_immediately             = true
   backup_retention_period       = 1
   db_subnet_group_name          = var.db_subnet_group_name
-  enable_local_write_forwarding = true
+  enable_local_write_forwarding = var.enable_local_write_forwarding
+
+  lifecycle {
+    ignore_changes = [
+      replication_source_identifier
+    ]
+  }
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
@@ -37,4 +43,5 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   availability_zone   = "eu-west-1a"
   apply_immediately   = true
   publicly_accessible = true
+
 }

@@ -17,3 +17,8 @@ variable "replication_source_identifier" {
   description = "ARN of a source DB cluster or DB instance"
   default = null
 }
+
+variable "enable_local_write_forwarding" {
+  description = "Enable local write forwarding"
+  default = false
+}
