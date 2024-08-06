@@ -29,7 +29,7 @@ resource "aws_rds_cluster" "this" {
   backup_retention_period = 1
   db_subnet_group_name    = var.db_subnet_group_name
 #   storage_type            = "gp3"  -- faluje sprawdzicc
-  #   enable_local_write_forwarding = true
+  enable_local_write_forwarding = true  # potem podmienic
 
   lifecycle {
     prevent_destroy = true
@@ -38,6 +38,20 @@ resource "aws_rds_cluster" "this" {
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
   identifier_prefix   = "first"
+  cluster_identifier  = aws_rds_cluster.this.id
+  instance_class      = "db.t3.medium"
+  engine              = "aurora-mysql"
+  engine_version      = "8.0.mysql_aurora.3.07.0"
+  apply_immediately   = true
+  publicly_accessible = true
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "aws_rds_cluster_instance" "second_cluster_instances" {
+  identifier_prefix   = "second"
   cluster_identifier  = aws_rds_cluster.this.id
   instance_class      = "db.t3.medium"
   engine              = "aurora-mysql"

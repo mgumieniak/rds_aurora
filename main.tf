@@ -14,23 +14,23 @@ module "network" {
   source = "./modules/network"
 }
 
-module "rds" {
-  source = "./modules/rds"
+# module "rds" {
+#   source = "./modules/rds"
+#
+#   db_name = "rds"
+#   db_username = var.db_username
+#   db_password = var.db_password
+#   db_subnet_group_name = module.network.db_subnet_group_name
+# }
 
-  db_name = "rds"
-  db_username = var.db_username
-  db_password = var.db_password
-  db_subnet_group_name = module.network.db_subnet_group_name
-}
-
-module "aurora" {
-  source = "./modules/aurora"
-
-  db_username = var.db_username
-  db_password = var.db_password
-  db_subnet_group_name = module.network.db_subnet_group_name
-#   replication_source_identifier = module.rds.db_arn
-}
+# module "aurora" {
+#   source = "./modules/aurora"
+#
+#   db_username = var.db_username
+#   db_password = var.db_password
+#   db_subnet_group_name = module.network.db_subnet_group_name
+# #   replication_source_identifier = module.rds.db_arn
+# }
 
 # module "aurora-serverless" {
 #   source = "./modules/aurora_servless"
