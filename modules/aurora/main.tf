@@ -20,8 +20,15 @@ resource "aws_rds_cluster" "this" {
   skip_final_snapshot         = true
   allow_major_version_upgrade = false
   apply_immediately           = true
-  backup_retention_period     = 1
-  db_subnet_group_name        = var.db_subnet_group_name
+  copy_tags_to_snapshot       = true
+  deletion_protection         = true
+
+  master_username = var.db_username
+  master_password = var.db_password
+
+  backup_retention_period = 1
+  db_subnet_group_name    = var.db_subnet_group_name
+#   storage_type            = "gp3"  -- faluje sprawdzicc
   #   enable_local_write_forwarding = true
 
   lifecycle {
@@ -35,7 +42,6 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
   instance_class      = "db.t3.medium"
   engine              = "aurora-mysql"
   engine_version      = "8.0.mysql_aurora.3.07.0"
-  availability_zone   = "eu-west-1c"
   apply_immediately   = true
   publicly_accessible = true
 
