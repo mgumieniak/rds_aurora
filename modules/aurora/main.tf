@@ -23,8 +23,8 @@ resource "aws_rds_cluster" "this" {
   copy_tags_to_snapshot       = true
   deletion_protection         = true
 
-#   master_username = var.db_username
-#   master_password = var.db_password
+  master_username = var.db_username  # nie moze byc od razu
+  master_password = var.db_password
 
   backup_retention_period = 1
   db_subnet_group_name    = var.db_subnet_group_name
