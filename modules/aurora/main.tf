@@ -21,7 +21,7 @@ resource "aws_rds_cluster" "this" {
   allow_major_version_upgrade = false
   apply_immediately           = true
   copy_tags_to_snapshot       = true
-  deletion_protection         = true
+#   deletion_protection         = true
 
   master_username = var.db_username  # nie moze byc od razu
   master_password = var.db_password
@@ -31,9 +31,9 @@ resource "aws_rds_cluster" "this" {
 #   storage_type            = "gp3"  -- faluje sprawdzicc
   enable_local_write_forwarding = true  # potem podmienic
 
-  lifecycle {
-    prevent_destroy = true
-  }
+#   lifecycle {
+#     prevent_destroy = true
+#   }
 }
 
 resource "aws_rds_cluster_instance" "cluster_instances" {
