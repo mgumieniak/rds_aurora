@@ -21,7 +21,7 @@ resource "aws_rds_cluster" "this" {
   allow_major_version_upgrade = false
   apply_immediately           = true
   copy_tags_to_snapshot       = true
-  deletion_protection         = true
+#   deletion_protection         = true
 
   master_username = var.db_username  # nie moze byc od razu
   master_password = var.db_password

@@ -4,7 +4,7 @@ terraform {
     hostname = "app.terraform.io"
 
     workspaces {
-      name = "eks"
+      name = "rds_aurora"
     }
   }
 
